@@ -64,7 +64,7 @@
 
 # 5运行环境需求 #
 ## 5.1操作系统平台 ##
-	Windows7
+	Windows7/Windows8/Windows10
 ## 5.2数据库系统平台 ##
 	MySql5.6
 ## 5.3编程工具 ##
