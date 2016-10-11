@@ -89,6 +89,7 @@
     <orderEntry type="library" exported="" name="support-annotations-24.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-24.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-24.0.0-alpha1" level="project" />
+    <orderEntry type="library" exported="" name="org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2" level="project" />
   </component>
 </module>
 
