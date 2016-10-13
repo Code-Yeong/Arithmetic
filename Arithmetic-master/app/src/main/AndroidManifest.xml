@@ -22,6 +22,7 @@
         <activity
             android:name=".view.SignupActivity"
             android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".view.GradeActivity" android:theme="@style/AppTheme.Dark"></activity>
     </application>
 
 </manifest>
