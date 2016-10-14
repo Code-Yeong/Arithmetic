@@ -1,5 +1,6 @@
 package com.example.administrator.arithmetic_master.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +21,13 @@ public class GradeActivity extends AppCompatActivity {
 
     public void selectGrade(View v)
     {
+        Intent intent=new Intent(getApplicationContext(), MainPageActivity.class);
         switch (v.getId())
         {
             case R.id.img_gradeone:
                 Log.i("Grade","One");
+                startActivity(intent);
+                finish();
                 break;
             case R.id.img_gradetwo:
                 Log.i("Grade","Two");
