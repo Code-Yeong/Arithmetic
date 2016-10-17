@@ -9,4 +9,7 @@
     <string name="signin_flag">还没有账户?创建一个</string>
     <string name="create_account">创建账户</string>
     <string name="login_flag">已经有账户?去登陆</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
 </resources>
