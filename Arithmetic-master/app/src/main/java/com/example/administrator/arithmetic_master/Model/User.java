@@ -5,13 +5,20 @@ package com.example.administrator.arithmetic_master.Model;
  */
 public class User {
 
+    public int currentExeGrade;
+    public int currentExeNum;
+
+
+
     private String userName;
     private int userGrade;
+
+
 
     private static final User _singleton=new User();
     protected void User(){}
 
-    public User getInstance()
+    public static User getInstance()
     {
         return _singleton;
     }
