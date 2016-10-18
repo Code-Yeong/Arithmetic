@@ -3,6 +3,8 @@ package com.example.administrator.arithmetic_master.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.arithmetic_master.R;
+import com.example.administrator.arithmetic_master.http.HttpUtil;
+import com.example.administrator.arithmetic_master.utils.CreateJson;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText _passwordText;
     Button _loginButton;
     TextView _signupLink;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,31 +72,30 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("登陆中...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
+        String loginname = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+        new HttpUtil(new android.os.Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.obj.toString().equals("0x01")) {
+                    onLoginFailed();
+                }else{
+                    onLoginSuccess();
+                }
+                progressDialog.dismiss();
+            }
+        },"userAction_login.action?loginname="+loginname+"&password="+password).start();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+                //获取注册的账号和密码并显示在界面输入框中
+                _emailText.setText(data.getStringExtra("loginname"));
+                _passwordText.setText(data.getStringExtra("password"));
+                login();//注册成功并返回登陆
             }
         }
     }
@@ -134,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             _passwordText.setError(null);
         }
-
         return valid;
     }
+
 }
