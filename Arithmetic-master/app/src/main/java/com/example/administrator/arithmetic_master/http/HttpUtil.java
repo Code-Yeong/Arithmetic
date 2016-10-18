@@ -14,7 +14,7 @@ import org.apache.http.util.EntityUtils;
  * 作用：处理网络请求
  * */
 public class HttpUtil extends Thread {
-    private final static String urlPrefix = "http://172.23.25.51:8080/AppServer/";
+    private final static String urlPrefix = "http://172.24.70.126:8080/ArithmeticService/";
     Handler handler;
     String url;
 
@@ -28,7 +28,7 @@ public class HttpUtil extends Thread {
 
     // 获得Post请求对象request
     public static HttpPost getHttpPost(String url) {
-        HttpPost request = new HttpPost(urlPrefix + url);
+        HttpPost request = new HttpPost(url);
         return request;
     }
 
@@ -45,17 +45,22 @@ public class HttpUtil extends Thread {
         Log.i("info", urlPrefix + url);
         // 发送Post请求，获得响应查询结果
         Message msg = new Message();
-        HttpPost request = HttpUtil.getHttpPost(urlPrefix + url);
+        HttpPost request = HttpUtil.getHttpPost(urlPrefix+url);
+        Log.i("info","re:"+request);
         String result;//从服务器取得的JSON类型的数据
         try {
             // 获得响应对象
             HttpResponse response = HttpUtil.getHttpResponse(request);
+            Log.i("info","rs:"+response);
             // 判断是否请求成功
+            Log.i("info","tt1");
             if (response.getStatusLine().getStatusCode() == 200) {
                 // 获得响应
+                Log.i("info","tt2");
                 result = EntityUtils.toString(response.getEntity());
                 msg.obj = result;//从服务器获得的结果
             } else {
+                Log.i("info","tt3");
                 msg.obj = "load_error";
             }
         } catch (Exception e) {

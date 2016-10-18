@@ -1,7 +1,9 @@
 package com.example.administrator.arithmetic_master.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.arithmetic_master.R;
+import com.example.administrator.arithmetic_master.http.HttpUtil;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -64,34 +67,35 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("创建账户中...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        //String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String loginname = _nameText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+        new HttpUtil(new android.os.Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.obj.toString().equals("0x00")) {
+                    onSignupFailed();
+                } else {
+                    onSignupSuccess(loginname,password);
+                }
+                progressDialog.dismiss();
+            }
+        },"userAction_regist.action?loginname="+loginname+"&password="+password).start();
     }
 
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(String loginname,String password) {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent intent=new Intent();
+        intent.putExtra("loginname",loginname);
+        intent.putExtra("password",password);
+        setResult(RESULT_OK,intent);
         finish();
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "The loginname is already exist", Toast.LENGTH_SHORT).show();
         _signupButton.setEnabled(true);
     }
 
@@ -99,7 +103,6 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         String name = _nameText.getText().toString();
-        //String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 2) {
