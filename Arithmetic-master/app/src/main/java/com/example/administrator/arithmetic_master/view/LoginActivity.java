@@ -13,14 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.arithmetic_master.Model.User;
 import com.example.administrator.arithmetic_master.R;
 import com.example.administrator.arithmetic_master.http.HttpUtil;
+import com.example.administrator.arithmetic_master.utils.AutoLogin;
 import com.example.administrator.arithmetic_master.utils.CreateJson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private boolean isAuto=false;
 
     EditText _emailText;
     EditText _passwordText;
@@ -36,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         _passwordText=(EditText)findViewById(R.id.input_password);
         _signupLink=(TextView)findViewById(R.id.link_signup);
         _loginButton=(Button)findViewById(R.id.btn_login);
+
+        String loginInfo=AutoLogin.read(this);
+        if(loginInfo.length()<5){
+            isAuto=false;
+        }else{
+            isAuto=true;
+            showLoginInfo(loginInfo);//从文件中读取用户名和密码并自动填写
+        }
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -56,9 +70,19 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void showLoginInfo(String info){
+        try {
+            JSONObject o=new JSONObject(info);
+            _emailText.setText(o.getString("loginname"));
+            _passwordText.setText(o.getString("password"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void login() {
         Log.d(TAG, "Login");
-
+        AutoLogin.save(this,_emailText.getText().toString().trim(),_passwordText.getText().toString().trim());//保存账号和密码
         if (!validate()) {
             onLoginFailed();
             return;
@@ -72,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("登陆中...");
         progressDialog.show();
 
-        String loginname = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String loginname = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
         new HttpUtil(new android.os.Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -81,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(msg.obj.toString().equals("0x01")) {
                     onLoginFailed();
                 }else{
+                    AutoLogin.save(LoginActivity.this,loginname, password);//保存账号和密码
+                    parseUserInfo(msg.obj.toString());
                     onLoginSuccess();
                 }
                 progressDialog.dismiss();
@@ -108,8 +134,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent intent = new Intent(getApplicationContext(), GradeActivity.class);
-        startActivity(intent);
+        if(User.getInstance().getUserGrade()==0) {
+            Intent intent = new Intent(getApplicationContext(), GradeActivity.class);
+            startActivity(intent);
+        }else{
+            startActivity(new Intent(this,MainPageActivity.class));
+        }
         finish();
     }
 
@@ -141,4 +171,17 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
+    public void parseUserInfo(String info){
+        try {
+            JSONObject j=new JSONObject(info);
+            User u=User.getInstance();
+            u.setUserFlag(Integer.parseInt(j.getString("flag")));
+            u.setUserGrade(Integer.parseInt(j.getString("grade")));
+            u.setUserId(j.getString("id"));
+            u.setUserLoginName(j.getString("loginname"));
+            u.setUserName(j.getString("name"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }
