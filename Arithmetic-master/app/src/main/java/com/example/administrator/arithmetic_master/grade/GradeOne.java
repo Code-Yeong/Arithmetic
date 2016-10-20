@@ -3,6 +3,8 @@ package com.example.administrator.arithmetic_master.grade;
 
 import com.example.administrator.arithmetic_master.baseimpl.BaseGeneratorImpl;
 
+import java.util.Random;
+
 public class GradeOne extends BaseGeneratorImpl {
 	public String getIntergralExpression(){
         String reg;
@@ -15,4 +17,6 @@ public class GradeOne extends BaseGeneratorImpl {
             reg = zhengshu(0,20)+"+"+zhengshi(0,20);
         }
         return reg;
+    }
 }
+
