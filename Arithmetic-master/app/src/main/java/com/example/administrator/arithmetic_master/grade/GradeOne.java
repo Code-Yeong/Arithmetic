@@ -19,3 +19,4 @@ public class GradeOne extends BaseGeneratorImpl {
         return reg;
     }
 }
+
