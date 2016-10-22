@@ -8,34 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.administrator.arithmetic_master.Model.Leaderboard_RowItem;
 import com.example.administrator.arithmetic_master.R;
 
+import java.util.ArrayList;
+
 public class MainPageActivity extends AppCompatActivity {
-
-    private static final int PICK_FINISH_PROBLEM_REQUEST = 1;
-
 
     private ImageView img_doCalculate;
     private ImageView img_reStart;
     private ImageView img_order;
     private ImageView img_statistic;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==PICK_FINISH_PROBLEM_REQUEST)
-        {
-            if(resultCode==RESULT_OK)
-            {
 
-            }
-
-            if(requestCode==RESULT_CANCELED)
-            {
-
-            }
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +36,7 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),CalculateActivity.class);
-                startActivityForResult(intent,PICK_FINISH_PROBLEM_REQUEST);
+                startActivity(intent);
 
             }
         });
@@ -80,9 +65,5 @@ public class MainPageActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
 }

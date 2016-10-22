@@ -97,7 +97,7 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		return sign;
 	}
 	
-	//确保出现除法运算时，能够整除
+	//
 	public String zhengshizhengchu(int min,int max) {
 		Random r=new Random();
 		int a=(r.nextInt(max-min+1)+min);
@@ -123,9 +123,9 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return a+op+b;
 	}
-	//构造保留三位小数的加减运算字符串
+	//锟斤拷锟届保锟斤拷锟斤拷位小锟斤拷锟侥加硷拷锟斤拷锟斤拷锟街凤拷锟斤拷
 	public String xiaoshuyunsuan(int deno) {
-		DecimalFormat dformat = new DecimalFormat("##0.00");	//小数的类型
+		DecimalFormat dformat = new DecimalFormat("##0.00");	//小锟斤拷锟斤拷锟斤拷锟斤拷
 		int first_cop=0;
 		int first_deno=0;
 		int second_cop=0;
@@ -167,9 +167,9 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return dformat.format(f1/first_deno)+op+dformat.format(f2/second_deno);
 	}
-	//构造一个保留count位数的小数
+	//锟斤拷锟斤拷一锟斤拷锟斤拷锟斤拷count位锟斤拷锟斤拷小锟斤拷
 	public String xiaoshu(int deno,int count) {
-		DecimalFormat dformat;	//小数的位数
+		DecimalFormat dformat;	//小锟斤拷锟斤拷位锟斤拷
 		if(count==1){
 			dformat = new DecimalFormat("##0.0");
 		}else if(count==2){
@@ -177,7 +177,7 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}else{
 			dformat = new DecimalFormat("##0.000");
 		}
-		float f;											//另整数转换为小数
+		float f;											//锟斤拷锟斤拷锟斤拷转锟斤拷为小锟斤拷
 		Random r=new Random();
 		int a=(r.nextInt(deno)+1);
 		int b=(r.nextInt(deno)+1);
@@ -195,5 +195,6 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		Random r=new Random();
 		return "(-"+(r.nextInt(max-min+1)+min)+")";
 	}
-	
+
+
 }
