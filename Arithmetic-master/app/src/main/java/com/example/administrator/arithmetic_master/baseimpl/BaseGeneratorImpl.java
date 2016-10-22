@@ -96,8 +96,7 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return sign;
 	}
-	
-	//确保出现除法运算时，能够整除
+
 	public String zhengshizhengchu(int min,int max) {
 		Random r=new Random();
 		int a=(r.nextInt(max-min+1)+min);
@@ -123,9 +122,8 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return a+op+b;
 	}
-	//构造保留三位小数的加减运算字符串
 	public String xiaoshuyunsuan(int deno) {
-		DecimalFormat dformat = new DecimalFormat("##0.00");	//小数的类型
+		DecimalFormat dformat = new DecimalFormat("##0.00");
 		int first_cop=0;
 		int first_deno=0;
 		int second_cop=0;
@@ -167,9 +165,8 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return dformat.format(f1/first_deno)+op+dformat.format(f2/second_deno);
 	}
-	//构造一个保留count位数的小数
 	public String xiaoshu(int deno,int count) {
-		DecimalFormat dformat;	//小数的位数
+		DecimalFormat dformat;
 		if(count==1){
 			dformat = new DecimalFormat("##0.0");
 		}else if(count==2){
@@ -177,7 +174,7 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}else{
 			dformat = new DecimalFormat("##0.000");
 		}
-		float f;											//另整数转换为小数
+		float f;
 		Random r=new Random();
 		int a=(r.nextInt(deno)+1);
 		int b=(r.nextInt(deno)+1);

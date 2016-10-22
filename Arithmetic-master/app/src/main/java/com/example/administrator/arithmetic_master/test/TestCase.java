@@ -52,13 +52,13 @@ public class TestCase {
     static void testGradeFive(){
     	GradeFive g5 = new GradeFive();
         for (int i = 0; i< 20; i++) {
-            System.out.print(g5.getIntergralExpression()+"\n");
+//            System.out.print(g5.getIntergralExpression()+"\n");
         }
     }
     static void testGradeSix(){
     	GradeSix g6 = new GradeSix();
         for (int i = 0; i< 20; i++) {
-            System.out.print(g6.getIntergralExpression()+"\n");
+//            System.out.print(g6.getIntergralExpression()+"\n");
         }
     }
     

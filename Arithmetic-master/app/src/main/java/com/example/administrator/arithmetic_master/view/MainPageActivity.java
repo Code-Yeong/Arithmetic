@@ -19,18 +19,16 @@ public class MainPageActivity extends AppCompatActivity {
     private ImageView img_reStart;
     private ImageView img_order;
     private ImageView img_statistic;
+    private ImageView img_muitiplication;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==PICK_FINISH_PROBLEM_REQUEST)
-        {
-            if(resultCode==RESULT_OK)
-            {
+        if (requestCode == PICK_FINISH_PROBLEM_REQUEST) {
+            if (resultCode == RESULT_OK) {
 
             }
 
-            if(requestCode==RESULT_CANCELED)
-            {
+            if (requestCode == RESULT_CANCELED) {
 
             }
         }
@@ -42,16 +40,17 @@ public class MainPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        img_doCalculate=(ImageView)findViewById(R.id.img_calculate);
-        img_reStart=(ImageView)findViewById(R.id.img_restart);
-        img_order=(ImageView)findViewById(R.id.img_order);
-        img_statistic=(ImageView)findViewById(R.id.img_statistic);
+        img_doCalculate = (ImageView) findViewById(R.id.img_calculate);
+        img_reStart = (ImageView) findViewById(R.id.img_restart);
+        img_order = (ImageView) findViewById(R.id.img_order);
+        img_statistic = (ImageView) findViewById(R.id.img_statistic);
+        img_muitiplication = (ImageView) findViewById(R.id.img_multiplication);
 
         img_doCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CalculateActivity.class);
-                startActivityForResult(intent,PICK_FINISH_PROBLEM_REQUEST);
+                Intent intent = new Intent(getApplicationContext(), CalculateActivity.class);
+                startActivityForResult(intent, PICK_FINISH_PROBLEM_REQUEST);
 
             }
         });
@@ -59,7 +58,7 @@ public class MainPageActivity extends AppCompatActivity {
         img_reStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),DoWrongActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DoWrongActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,7 +66,7 @@ public class MainPageActivity extends AppCompatActivity {
         img_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),UserOrderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), UserOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,14 +74,17 @@ public class MainPageActivity extends AppCompatActivity {
         img_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),StatisticActivity.class);
+                Intent intent = new Intent(getApplicationContext(), StatisticActivity.class);
                 startActivity(intent);
             }
         });
+        img_muitiplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainPageActivity.this, MuitiplicationActivity.class));
+            }
+        });
     }
-
-
-
 
 
 }
