@@ -96,7 +96,12 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return sign;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	//
+>>>>>>> 6cd14391598409cfdc919fafcd0a0d0eabd10e71
 	public String zhengshizhengchu(int min,int max) {
 		Random r=new Random();
 		int a=(r.nextInt(max-min+1)+min);
@@ -122,8 +127,14 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return a+op+b;
 	}
+<<<<<<< HEAD
 	public String xiaoshuyunsuan(int deno) {
 		DecimalFormat dformat = new DecimalFormat("##0.00");
+=======
+	//���챣����λС���ļӼ������ַ���
+	public String xiaoshuyunsuan(int deno) {
+		DecimalFormat dformat = new DecimalFormat("##0.00");	//С��������
+>>>>>>> 6cd14391598409cfdc919fafcd0a0d0eabd10e71
 		int first_cop=0;
 		int first_deno=0;
 		int second_cop=0;
@@ -165,8 +176,14 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}
 		return dformat.format(f1/first_deno)+op+dformat.format(f2/second_deno);
 	}
+<<<<<<< HEAD
 	public String xiaoshu(int deno,int count) {
 		DecimalFormat dformat;
+=======
+	//����һ������countλ����С��
+	public String xiaoshu(int deno,int count) {
+		DecimalFormat dformat;	//С����λ��
+>>>>>>> 6cd14391598409cfdc919fafcd0a0d0eabd10e71
 		if(count==1){
 			dformat = new DecimalFormat("##0.0");
 		}else if(count==2){
@@ -174,7 +191,11 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		}else{
 			dformat = new DecimalFormat("##0.000");
 		}
+<<<<<<< HEAD
 		float f;
+=======
+		float f;											//������ת��ΪС��
+>>>>>>> 6cd14391598409cfdc919fafcd0a0d0eabd10e71
 		Random r=new Random();
 		int a=(r.nextInt(deno)+1);
 		int b=(r.nextInt(deno)+1);
@@ -192,5 +213,6 @@ public class BaseGeneratorImpl extends BaseGenerator {
 		Random r=new Random();
 		return "(-"+(r.nextInt(max-min+1)+min)+")";
 	}
-	
+
+
 }

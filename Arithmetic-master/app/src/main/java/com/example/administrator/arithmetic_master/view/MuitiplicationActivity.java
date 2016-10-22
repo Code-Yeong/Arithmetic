@@ -17,7 +17,7 @@ public class MuitiplicationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_muitiplication);
 
         img_back = (ImageView) findViewById(R.id.mul_back);
-        
+
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
