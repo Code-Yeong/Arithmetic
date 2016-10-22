@@ -1,21 +1,29 @@
 package com.example.administrator.arithmetic_master.view;
 
 
-
-
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.arithmetic_master.Model.User;
 import com.example.administrator.arithmetic_master.R;
+import com.example.administrator.arithmetic_master.base.BaseGenerator;
+import com.example.administrator.arithmetic_master.baseimpl.BaseGeneratorImpl;
+import com.example.administrator.arithmetic_master.grade.GradeFive;
+import com.example.administrator.arithmetic_master.grade.GradeFour;
 import com.example.administrator.arithmetic_master.grade.GradeOne;
+import com.example.administrator.arithmetic_master.grade.GradeSix;
+import com.example.administrator.arithmetic_master.grade.GradeThree;
+import com.example.administrator.arithmetic_master.grade.GradeTwo;
+import com.example.administrator.arithmetic_master.http.HttpUtil;
+import com.example.administrator.arithmetic_master.utils.Convert;
+import com.example.administrator.arithmetic_master.utils.DisplayMsg;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -32,6 +40,7 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
     //题目相关变量
     private ArrayList<String> contentContainer=new ArrayList<>(); //题目内容保存的容器
     private ArrayList<String> answerContainer=new ArrayList<>(); //答案保存的容器
+    private ArrayList<String> correctAnswerContainer=new ArrayList<>();//正确答案的容器
     private int currentProblemIndex=0;//当前题目索引
 
     private TextView problem_content;
@@ -81,11 +90,18 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         User.getInstance().currentExeGrade=settingDialog.getGrade();
         User.getInstance().currentExeNum=settingDialog.getNum();
 
-        //根据对话框取得相对应的题目
+        //根据对话框内容取得相对应的题目、正确答案及用户默认计算结果，默认结果为空字符串
         for(int i=0;i<User.getInstance().currentExeNum;i++)
         {
-            GradeOne gradeOne=new GradeOne();
-            contentContainer.add(gradeOne.zhengshi(1,20));
+            //生成题目
+            String problem=GenerateProblem(User.getInstance().currentExeGrade);
+            contentContainer.add(problem);
+            //生成对应题目的正确答案。
+            BaseGenerator baseGenerator=new BaseGeneratorImpl();
+            String correctAsn=baseGenerator.calculate(Convert.infix2postfixMdf(problem));
+            Log.i("answer",correctAsn);
+            correctAnswerContainer.add(correctAsn);
+            //初始化用户计算结棍容器
             answerContainer.add("");
         }
         UpdateProblem(currentProblemIndex);
@@ -176,11 +192,10 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
                 AlterAnswer(".");
                 break;
             case R.id.img_return:
-                setResult(RESULT_CANCELED,null);
                 finish();
                 break;
             case R.id.img_finishProblem:
-                setResult(RESULT_OK,null);
+                SendResult();
                 finish();
                 break;
             default:
@@ -188,6 +203,7 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         }
     }
 
+    //修改答案
     public void AlterAnswer(String singleChar)
     {
         String answer=answerContainer.get(currentProblemIndex);
@@ -215,4 +231,83 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         problem_content.setText(contentContainer.get(index));
         problem_answer.setText(answerContainer.get(index));
     }
+
+    public String GenerateProblem(int grade)
+    {
+        String problem="";
+        switch (grade)
+        {
+            case 1:
+                GradeOne gradeOne =new GradeOne();
+                problem=gradeOne.getIntergralExpression();
+                break;
+            case 2:
+                GradeTwo gradeTwo =new GradeTwo();
+                problem=gradeTwo.getIntergralExpression();
+                break;
+            case 3:
+                GradeThree gradeThree=new GradeThree();
+                problem=gradeThree.getIntergralExpression();
+                break;
+            case 4:
+                GradeFour gradeFour=new GradeFour();
+                problem=gradeFour.getIntergralExpression();
+                break;
+            case 5:
+                GradeFive gradeFive=new GradeFive();
+                problem=gradeFive.getIntergralExpression();
+                break;
+            case 6:
+                GradeSix gradeSix=new GradeSix();
+                problem=gradeSix.getIntergralExpression();
+                break;
+            default:
+                DisplayMsg.Show(this,"年级错误");
+                break;
+        }
+        return problem;
+    }
+
+    private void SendResult()
+    {
+        String userId=User.getInstance().getUserId();
+        String totalCount=User.getInstance().currentExeNum+"";
+        String useTime= totalTime+"";
+        int rightCount=0;
+        for(int i=0;i<User.getInstance().currentExeNum;i++)
+        {
+            if(answerContainer.get(i).equals(correctAnswerContainer.get(i)))
+            {
+                rightCount++;
+            }
+        }
+        String str_rightCount=rightCount+"";
+
+        //计算分数
+        float score=0;
+        float float_rightCount=rightCount;
+        float float_totalCount=User.getInstance().currentExeNum;
+
+        if(User.getInstance().getUserGrade()<4)
+        {
+            score=(float_rightCount/float_totalCount)*(5*float_totalCount/totalTime);
+        }
+        else
+        {
+            score=(float_rightCount/float_totalCount)*(10*float_totalCount/totalTime);
+        }
+        DisplayMsg.Show(this,"您答对了"+str_rightCount+",所得积分为："+score);
+
+        //将记录发送到服务端记录
+        String url="recordsAction_saveRecord.action?userid="+userId+"&rightcount="+str_rightCount+"&totalcount="+totalCount+"&time="+useTime;
+        new HttpUtil(new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+            }
+        },url).start();
+    }
+
 }
