@@ -35,7 +35,7 @@
 
         <activity android:name=".view.CalculateActivity"/>
         <activity android:name=".view.DoWrongActivity" />
-        <activity android:name=".view.UserOrderActivity" />
+        <activity android:name=".view.UserOrderActivity"  android:theme="@style/AppTheme.Dark"/>
         <activity android:name=".view.StatisticActivity" />
     </application>
 
