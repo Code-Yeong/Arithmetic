@@ -18,6 +18,7 @@ import com.example.administrator.arithmetic_master.R;
 import com.example.administrator.arithmetic_master.http.HttpUtil;
 import com.example.administrator.arithmetic_master.utils.AutoLogin;
 import com.example.administrator.arithmetic_master.utils.CreateJson;
+import com.example.administrator.arithmetic_master.utils.DisplayMsg;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.obj.toString().equals("0x01")) {
+                if(msg.obj.toString().equals("0x01")||msg.obj.toString().equals("0x00")) {
                     onLoginFailed();
                 }else{
                     AutoLogin.save(LoginActivity.this,loginname, password);//保存账号和密码
@@ -144,8 +145,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
+        DisplayMsg.Show(this,"登录失败");
         _loginButton.setEnabled(true);
     }
 
