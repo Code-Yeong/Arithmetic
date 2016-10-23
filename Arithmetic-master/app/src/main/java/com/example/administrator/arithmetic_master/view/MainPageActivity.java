@@ -23,7 +23,7 @@ public class MainPageActivity extends AppCompatActivity {
     private ImageView img_muitiplication;
     private ImageView img_tips;
     private ImageView img_classmate;
-
+    private ImageView img_personal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class MainPageActivity extends AppCompatActivity {
         img_muitiplication = (ImageView) findViewById(R.id.img_multiplication);
         img_tips = (ImageView) findViewById(R.id.img_tips);
         img_classmate = (ImageView) findViewById(R.id.img_classmate);
+        img_personal =(ImageView)findViewById(R.id.img_personal);
 
         img_doCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +89,13 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainPageActivity.this, ClassMateActivity.class));
+            }
+        });
+
+         img_personal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainPageActivity.this, PersonalActivity.class));
             }
         });
     }

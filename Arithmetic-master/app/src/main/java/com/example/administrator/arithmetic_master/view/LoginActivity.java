@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private boolean isAuto=false;
+    private boolean isAuto = false;
 
     EditText _emailText;
     EditText _passwordText;
@@ -39,16 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _emailText=(EditText)findViewById(R.id.input_email);
-        _passwordText=(EditText)findViewById(R.id.input_password);
-        _signupLink=(TextView)findViewById(R.id.link_signup);
-        _loginButton=(Button)findViewById(R.id.btn_login);
+        _emailText = (EditText) findViewById(R.id.input_email);
+        _passwordText = (EditText) findViewById(R.id.input_password);
+        _signupLink = (TextView) findViewById(R.id.link_signup);
+        _loginButton = (Button) findViewById(R.id.btn_login);
 
-        String loginInfo=AutoLogin.read(this);
-        if(loginInfo.length()<5){
-            isAuto=false;
-        }else{
-            isAuto=true;
+        String loginInfo = AutoLogin.read(this);
+        if (loginInfo.length() < 5) {
+            isAuto = false;
+        } else {
+            isAuto = true;
             showLoginInfo(loginInfo);//从文件中读取用户名和密码并自动填写
         }
 
@@ -71,9 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void showLoginInfo(String info){
+    public void showLoginInfo(String info) {
         try {
-            JSONObject o=new JSONObject(info);
+            JSONObject o = new JSONObject(info);
             _emailText.setText(o.getString("loginname"));
             _passwordText.setText(o.getString("password"));
         } catch (JSONException e) {
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login() {
         Log.d(TAG, "Login");
-        AutoLogin.save(this,_emailText.getText().toString().trim(),_passwordText.getText().toString().trim());//保存账号和密码
+        AutoLogin.save(this, _emailText.getText().toString().trim(), _passwordText.getText().toString().trim());//保存账号和密码
         if (!validate()) {
             onLoginFailed();
             return;
@@ -99,20 +99,20 @@ public class LoginActivity extends AppCompatActivity {
 
         final String loginname = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
-        new HttpUtil(new android.os.Handler(){
+        new HttpUtil(new android.os.Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.obj.toString().equals("0x01")||msg.obj.toString().equals("0x00")) {
+                if (msg.obj.toString().equals("0x01") || msg.obj.toString().equals("0x00")) {
                     onLoginFailed();
-                }else{
-                    AutoLogin.save(LoginActivity.this,loginname, password);//保存账号和密码
+                } else {
+                    AutoLogin.save(LoginActivity.this, loginname, password);//保存账号和密码
                     parseUserInfo(msg.obj.toString());
                     onLoginSuccess();
                 }
                 progressDialog.dismiss();
             }
-        },"userAction_login.action?loginname="+loginname+"&password="+password).start();
+        }, "userAction_login.action?loginname=" + loginname + "&password=" + password).start();
     }
 
     @Override
@@ -135,17 +135,17 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        if(User.getInstance().getUserGrade()==0) {
+        if (User.getInstance().getUserGrade() == 0) {
             Intent intent = new Intent(getApplicationContext(), GradeActivity.class);
             startActivity(intent);
-        }else{
-            startActivity(new Intent(this,MainPageActivity.class));
+        } else {
+            startActivity(new Intent(this, MainPageActivity.class));
         }
         finish();
     }
 
     public void onLoginFailed() {
-        DisplayMsg.Show(this,"登录失败");
+        DisplayMsg.Show(this, "登录失败");
         _loginButton.setEnabled(true);
     }
 
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() ) {
+        if (email.isEmpty()) {
             _emailText.setError("请输入用户名");
             valid = false;
         } else {
@@ -171,15 +171,16 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void parseUserInfo(String info){
+    public void parseUserInfo(String info) {
         try {
-            JSONObject j=new JSONObject(info);
-            User u=User.getInstance();
+            JSONObject j = new JSONObject(info);
+            User u = User.getInstance();
             u.setUserFlag(Integer.parseInt(j.getString("flag")));
             u.setUserGrade(Integer.parseInt(j.getString("grade")));
             u.setUserId(j.getString("id"));
             u.setUserLoginName(j.getString("loginname"));
             u.setUserName(j.getString("name"));
+            u.setSex(j.getString("sex"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
