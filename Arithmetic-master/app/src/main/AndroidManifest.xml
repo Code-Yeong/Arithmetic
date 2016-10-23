@@ -53,6 +53,9 @@
         <activity
             android:name=".view.ClassMateActivity"
             android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.DoWrong2ACtivity"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>
