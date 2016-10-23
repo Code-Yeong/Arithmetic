@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.arithmetic_master">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,14 +31,22 @@
             android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".view.MainPageActivity"
-            android:theme="@style/AppTheme.Dark" >
-
-        </activity>
-
-        <activity android:name=".view.CalculateActivity"/>
-        <activity android:name=".view.DoWrongActivity" />
-        <activity android:name=".view.UserOrderActivity"  android:theme="@style/AppTheme.Dark"/>
-        <activity android:name=".view.StatisticActivity" />
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.CalculateActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.DoWrongActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.UserOrderActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.StatisticActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".view.MuitiplicationActivity"
+            android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>
