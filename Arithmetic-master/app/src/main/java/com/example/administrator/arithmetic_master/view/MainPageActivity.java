@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.administrator.arithmetic_master.Model.Leaderboard_RowItem;
+import com.example.administrator.arithmetic_master.Model.User;
 import com.example.administrator.arithmetic_master.R;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class MainPageActivity extends AppCompatActivity {
     private ImageView img_order;
     private ImageView img_statistic;
     private ImageView img_muitiplication;
+    private ImageView img_tips;
+    private ImageView img_classmate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainPageActivity extends AppCompatActivity {
         img_order = (ImageView) findViewById(R.id.img_order);
         img_statistic = (ImageView) findViewById(R.id.img_statistic);
         img_muitiplication = (ImageView) findViewById(R.id.img_multiplication);
+        img_tips = (ImageView) findViewById(R.id.img_tips);
+        img_classmate = (ImageView) findViewById(R.id.img_classmate);
 
         img_doCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +66,7 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), StatisticActivity.class);
+                intent.putExtra("userid", User.getInstance().getUserId());
                 startActivity(intent);
             }
         });
@@ -68,6 +74,20 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainPageActivity.this, MuitiplicationActivity.class));
+            }
+        });
+
+        img_tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainPageActivity.this, MathTipsActivity.class));
+            }
+        });
+
+        img_classmate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainPageActivity.this, ClassMateActivity.class));
             }
         });
     }
