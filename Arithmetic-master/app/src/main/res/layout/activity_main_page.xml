@@ -140,6 +140,7 @@
                     android:src="@drawable/docal"/>
 
                 <ImageView
+                    android:id="@+id/img_tips"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerInside"
@@ -155,6 +156,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/img_classmate"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
                     android:scaleType="centerInside"
