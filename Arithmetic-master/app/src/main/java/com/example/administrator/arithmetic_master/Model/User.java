@@ -15,9 +15,42 @@ public class User {
     private String userId;
     private int userFlag;
     private String UserLoginName;
+    private String sex;
+    private String email;
+    private String address;
+    private String phone;
 
+    public String getAddress() {
+        return address;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     private static final User _singleton=new User();
     protected void User(){}

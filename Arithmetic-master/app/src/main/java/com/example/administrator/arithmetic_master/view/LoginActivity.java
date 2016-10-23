@@ -180,6 +180,7 @@ public class LoginActivity extends AppCompatActivity {
             u.setUserId(j.getString("id"));
             u.setUserLoginName(j.getString("loginname"));
             u.setUserName(j.getString("name"));
+            u.setSex(j.getString("sex"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

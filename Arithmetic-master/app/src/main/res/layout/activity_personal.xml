@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.example.administrator.arithmetic_master.view.PersonalActivity">
+
+
+    <!--top-->
+    <RelativeLayout
+        android:id="@+id/personal_top_part"
+        android:layout_width="400dp"
+        android:layout_height="250dp">
+
+        <ImageView
+            android:src="@drawable/personal_top_bg"
+            android:layout_width="400dp"
+            android:layout_height="250dp" />
+
+        <ImageView
+            android:id="@+id/personal_back"
+            android:src="@drawable/leaderboard_back"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <!--上 行-->
+        <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--设置-->
+            <ImageView
+                android:id="@+id/personal_setting"
+                android:layout_marginLeft="40dp"
+                android:src="@drawable/personal_top_settings"
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+
+            <!--统计-->
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/personal_top_stats"
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+
+        </RelativeLayout>
+
+        <!--下 行-->
+        <RelativeLayout
+            android:layout_marginTop="130dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--个人-->
+            <RelativeLayout
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:id="@+id/personal_information"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/personal_top_roundbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/personal_message"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/personal_top_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <!--消息-->
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/personal_top_roundbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/personal_top_messages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <!--中间头像-->
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="120dp"
+            android:layout_height="120dp">
+
+            <ImageView
+                android:id="@+id/personal_head"
+                android:src="@drawable/personal_top_holder"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:text="LPW"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </RelativeLayout>
+
+    <!--center-->
+    <LinearLayout
+        android:id="@+id/personal_center_part"
+        android:layout_below="@id/personal_top_part"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="58dp">
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@drawable/personal_center_bg"
+                android:layout_width="120dp"
+                android:layout_height="58dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="25sp"
+                android:text="我的好友"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="120dp"
+            android:layout_height="58dp">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@drawable/personal_center_bg"
+                android:layout_width="120dp"
+                android:layout_height="58dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="25sp"
+                android:text="我的班级"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="120dp"
+            android:layout_height="58dp">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:src="@drawable/personal_center_bg"
+                android:layout_width="120dp"
+                android:layout_height="58dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="25sp"
+                android:text="年级动态"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--bottom-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/personal_center_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="模拟训练"
+            android:layout_marginLeft="20dp"
+            android:textSize="30sp"
+            android:textColor="#64B5F6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/personal_bottom_bg"
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/primary"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/intermidate"
+                android:layout_marginRight="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:src="@drawable/advance"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
