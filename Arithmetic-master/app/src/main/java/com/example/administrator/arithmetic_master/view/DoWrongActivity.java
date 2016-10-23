@@ -26,18 +26,17 @@ public class DoWrongActivity extends AppCompatActivity {
     //计时相关变量
     private Handler timeHandler;
     private TextView exe_time;
-    private int totalTime=0;
+    private int totalTime = 0;
 
     //题目相关变量
-    private ArrayList<String> contentContainer=new ArrayList<>(); //题目内容保存的容器
-    private ArrayList<String> answerContainer=new ArrayList<>(); //答案保存的容器
-    private ArrayList<String> correctAnswerContainer=new ArrayList<>();//正确答案的容器
-    private int currentProblemIndex=0;//当前题目索引
+    private ArrayList<String> contentContainer = new ArrayList<>(); //题目内容保存的容器
+    private ArrayList<String> answerContainer = new ArrayList<>(); //答案保存的容器
+    private ArrayList<String> correctAnswerContainer = new ArrayList<>();//正确答案的容器
+    private int currentProblemIndex = 0;//当前题目索引
 
     private TextView problem_content;
     private TextView problem_answer;
     private ImageView finishProblem;
-
 
 
     @Override
@@ -45,32 +44,28 @@ public class DoWrongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_do_wrong);
 
-        exe_time=(TextView) findViewById(R.id.exe_time);
-        problem_content=(TextView)findViewById(R.id.problem_content);
-        problem_answer=(TextView)findViewById(R.id.problem_answer) ;
-        finishProblem=(ImageView)findViewById(R.id.img_finishProblem);
-        timeHandler=new Handler()
-        {
+        exe_time = (TextView) findViewById(R.id.exe_time);
+        problem_content = (TextView) findViewById(R.id.problem_content);
+        problem_answer = (TextView) findViewById(R.id.problem_answer);
+        finishProblem = (ImageView) findViewById(R.id.img_finishProblem);
+        timeHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.what==0x1233)
-                {
+                if (msg.what == 0x1233) {
                     totalTime++;
-                    String hour=(totalTime/3600)+"";
-                    String minute=(totalTime-Integer.parseInt(hour)*3600)/60+"";
-                    String second=(totalTime%60)+"";
-                    String time=hour+":"+minute+":"+second;
+                    String hour = (totalTime / 3600) + "";
+                    String minute = (totalTime - Integer.parseInt(hour) * 3600) / 60 + "";
+                    String second = (totalTime % 60) + "";
+                    String time = hour + ":" + minute + ":" + second;
                     exe_time.setText(time);
                 }
             }
         };
     }
 
-    public void NumClick(View view)
-    {
-        switch (view.getId())
-        {
+    public void NumClick(View view) {
+        switch (view.getId()) {
             case R.id.img_numOne:
                 AlterAnswer("1");
                 break;
@@ -106,20 +101,17 @@ public class DoWrongActivity extends AppCompatActivity {
                 break;
             case R.id.next_problem:
                 //防止数组越界
-                if(currentProblemIndex< User.getInstance().currentExeNum-1)
-                {
+                if (currentProblemIndex < User.getInstance().currentExeNum - 1) {
                     currentProblemIndex++;
                 }
 
-                if(currentProblemIndex==User.getInstance().currentExeNum-1)
-                {
+                if (currentProblemIndex == User.getInstance().currentExeNum - 1) {
                     finishProblem.setVisibility(View.VISIBLE);
                 }
                 UpdateProblem(currentProblemIndex);
                 break;
             case R.id.last_problem:
-                if(currentProblemIndex>0)
-                {
+                if (currentProblemIndex > 0) {
                     currentProblemIndex--;
                 }
                 UpdateProblem(currentProblemIndex);
@@ -146,109 +138,94 @@ public class DoWrongActivity extends AppCompatActivity {
     }
 
     //修改答案
-    public void AlterAnswer(String singleChar)
-    {
-        String answer=answerContainer.get(currentProblemIndex);
-        if(singleChar.equals("Clean"))
-        {
-            if(answer.equals("")){
+    public void AlterAnswer(String singleChar) {
+        String answer = answerContainer.get(currentProblemIndex);
+        if (singleChar.equals("Clean")) {
+            if (answer.equals("")) {
 
+            } else {
+                int length = answer.length();
+                answer = answer.substring(0, length - 1);
             }
-            else{
-                int length=answer.length();
-                answer=answer.substring(0,length-1);
-            }
+        } else {
+            answer = answer + singleChar;
         }
-        else
-        {
-            answer=answer+singleChar;
-        }
-        answerContainer.set(currentProblemIndex,answer);
+        answerContainer.set(currentProblemIndex, answer);
         UpdateProblem(currentProblemIndex);
     }
 
     //刷新问题或答案
-    private void UpdateProblem(int index)
-    {
+    private void UpdateProblem(int index) {
         problem_content.setText(contentContainer.get(index));
         problem_answer.setText(answerContainer.get(index));
     }
 
-    public String GenerateProblem(int grade)
-    {
-        String problem="";
-        switch (grade)
-        {
+    public String GenerateProblem(int grade) {
+        String problem = "";
+        switch (grade) {
             case 1:
-                GradeOne gradeOne =new GradeOne();
-                problem=gradeOne.getIntergralExpression();
+                GradeOne gradeOne = new GradeOne();
+                problem = gradeOne.getIntergralExpression();
                 break;
             case 2:
-                GradeTwo gradeTwo =new GradeTwo();
-                problem=gradeTwo.getIntergralExpression();
+                GradeTwo gradeTwo = new GradeTwo();
+                problem = gradeTwo.getIntergralExpression();
                 break;
             case 3:
-                GradeThree gradeThree=new GradeThree();
-                problem=gradeThree.getIntergralExpression();
+                GradeThree gradeThree = new GradeThree();
+                problem = gradeThree.getIntergralExpression();
                 break;
             case 4:
-                GradeFour gradeFour=new GradeFour();
-                problem=gradeFour.getIntergralExpression();
+                GradeFour gradeFour = new GradeFour();
+                problem = gradeFour.getIntergralExpression();
                 break;
             case 5:
-                GradeFive gradeFive=new GradeFive();
-                problem=gradeFive.getIntergralExpression();
+                GradeFive gradeFive = new GradeFive();
+                problem = gradeFive.getIntergralExpression();
                 break;
             case 6:
-                GradeSix gradeSix=new GradeSix();
-                problem=gradeSix.getIntergralExpression();
+                GradeSix gradeSix = new GradeSix();
+                problem = gradeSix.getIntergralExpression();
                 break;
             default:
-                DisplayMsg.Show(this,"年级错误");
+                DisplayMsg.Show(this, "年级错误");
                 break;
         }
         return problem;
     }
 
-    private void SendResult()
-    {
-        String userId=User.getInstance().getUserId();
-        String totalCount=User.getInstance().currentExeNum+"";
-        String useTime= totalTime+"";
-        int rightCount=0;
-        for(int i=0;i<User.getInstance().currentExeNum;i++)
-        {
-            if(answerContainer.get(i).equals(correctAnswerContainer.get(i)))
-            {
+    private void SendResult() {
+        String userId = User.getInstance().getUserId();
+        String totalCount = User.getInstance().currentExeNum + "";
+        String useTime = totalTime + "";
+        int rightCount = 0;
+        for (int i = 0; i < User.getInstance().currentExeNum; i++) {
+            if (answerContainer.get(i).equals(correctAnswerContainer.get(i))) {
                 rightCount++;
             }
         }
-        String str_rightCount=rightCount+"";
+        String str_rightCount = rightCount + "";
 
         //计算分数
-        float score=0;
-        float float_rightCount=rightCount;
-        float float_totalCount=User.getInstance().currentExeNum;
+        float score = 0;
+        float float_rightCount = rightCount;
+        float float_totalCount = User.getInstance().currentExeNum;
 
-        if(User.getInstance().getUserGrade()<4)
-        {
-            score=(float_rightCount/float_totalCount)*(5*float_totalCount/totalTime);
+        if (User.getInstance().getUserGrade() < 4) {
+            score = (float_rightCount / float_totalCount) * (5 * float_totalCount / totalTime);
+        } else {
+            score = (float_rightCount / float_totalCount) * (10 * float_totalCount / totalTime);
         }
-        else
-        {
-            score=(float_rightCount/float_totalCount)*(10*float_totalCount/totalTime);
-        }
-        DisplayMsg.Show(this,"您答对了"+str_rightCount+",所得积分为："+score);
+        DisplayMsg.Show(this, "您答对了" + str_rightCount + ",所得积分为：" + score);
 
         //将记录发送到服务端记录
-        String url="recordsAction_saveRecord.action?userid="+userId+"&rightcount="+str_rightCount+"&totalcount="+totalCount+"&time="+useTime;
-        new HttpUtil(new Handler()
-        {
+        String url = "recordsAction_saveRecord.action?userid=" + userId + "&rightcount=" + str_rightCount + "&totalcount=" + totalCount + "&time=" + useTime;
+        new HttpUtil(new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
             }
-        },url).start();
+        }, url).start();
     }
 }
