@@ -1,5 +1,6 @@
 package com.example.administrator.arithmetic_master.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,13 +52,14 @@ public class StatisticActivity extends AppCompatActivity {
         sta_count = (TextView) findViewById(R.id.sta_count);
         img_back = (ImageView) findViewById(R.id.sta_back);
 
+        Intent intent = getIntent();
         new HttpUtil(new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 getData(msg.obj.toString());
             }
-        }, "recordsAction_getRecordsByUser.action?userid=" + User.getInstance().getUserId()
+        }, "recordsAction_getRecordsByUser.action?userid=" + intent.getStringExtra("userid")
         ).start();
 
         img_back.setOnClickListener(new View.OnClickListener() {
