@@ -3,10 +3,232 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context="com.example.administrator.arithmetic_master.view.DoWrong2ACtivity">
 
+    <ImageView
+        android:id="@+id/calculate_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/title1" />
+
+
+    <TextView
+        android:id="@+id/wrong_time"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/container"
+        android:layout_alignEnd="@+id/calculate_title"
+        android:layout_alignRight="@+id/calculate_title"
+        android:layout_marginBottom="23dp"
+        android:gravity="center"
+        android:textSize="35dp" />
+
+    <ImageView
+        android:id="@+id/wrong_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/calculate_title"
+        android:layout_alignStart="@id/calculate_title"
+        android:layout_alignTop="@id/calculate_title"
+        android:layout_marginTop="23dp"
+        android:onClick="NumClick"
+        android:src="@drawable/backtomain" />
+    <!--问题相关-->
+    <RelativeLayout
+        android:id="@+id/wrong_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/num_keyword"
+        android:layout_below="@+id/calculate_title"
+        android:background="#e1dfdf"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/wrong_problem_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wrong_problem_content"
+                android:layout_width="250dp"
+                android:layout_height="80dp"
+                android:height="40dp"
+                android:background="#ee2bfa4a"
+                android:gravity="center"
+                android:textSize="25sp" />
+
+
+            <TextView
+                android:id="@+id/wrong_problem_answer"
+                android:layout_width="110dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="#fc8505"
+                android:gravity="center"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wrong_problem_container"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/wrong_last_problem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:text="上一题" />
+
+            <ImageView
+                android:id="@+id/wrong_img_finishProblem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:onClick="NumClick"
+                android:src="@drawable/submit"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/wrong_next_problem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:text="下一题" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- 数字键盘 -->
+    <LinearLayout
+        android:id="@+id/wrong_num_keyword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/wrong_img_numOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_1" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_2" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_3" />
+
+            <ImageView
+                android:id="@+id/wrong_img_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/divide" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/wrong_img_numFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_4" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_5" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_6" />
+
+            <ImageView
+                android:id="@+id/wrong_img_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/minus" />
+
+            <ImageView
+                android:id="@+id/wrong_img_clean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/clean" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/wrong_img_numSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_7" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numEight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_8" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numNine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_9" />
+
+            <ImageView
+                android:id="@+id/wrong_img_numZero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_0" />
+
+            <ImageView
+                android:id="@+id/wrong_img_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/point" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

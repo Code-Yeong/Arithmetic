@@ -8,21 +8,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        android:background="#5668ab">
 
         <ImageView
             android:id="@+id/mate_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/backtomain" />
+            android:src="@drawable/leaderboard_back" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:text="同年级小朋友"
-            android:textSize="45px" />
+            android:gravity="center"
+            android:text="同年级小伙伴"
+            android:textSize="55px" />
     </RelativeLayout>
 
     <LinearLayout

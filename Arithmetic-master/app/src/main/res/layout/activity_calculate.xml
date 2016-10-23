@@ -8,100 +8,103 @@
 
     <ImageView
         android:id="@+id/calculate_title"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/title1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/title1" />
 
 
     <TextView
-        android:gravity="center"
-        android:textSize="35dp"
         android:id="@+id/exe_time"
         android:layout_width="140dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="23dp"
         android:layout_above="@+id/container"
+        android:layout_alignEnd="@+id/calculate_title"
         android:layout_alignRight="@+id/calculate_title"
-        android:layout_alignEnd="@+id/calculate_title" />
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:textColor="#FF0000"
+        android:textSize="35dp" />
 
     <ImageView
-        android:layout_alignTop="@id/calculate_title"
+        android:id="@+id/img_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@id/calculate_title"
         android:layout_alignStart="@id/calculate_title"
+        android:layout_alignTop="@id/calculate_title"
         android:layout_marginTop="23dp"
-        android:src="@drawable/backtomain"
-        android:id="@+id/img_return"
         android:onClick="NumClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/backtomain" />
     <!--问题相关-->
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:background="#e1dfdf"
-        android:orientation="vertical"
-        android:layout_below="@+id/calculate_title"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/num_keyword"
-        android:layout_height="wrap_content">
+        android:layout_below="@+id/calculate_title"
+        android:background="#e1dfdf"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/problem_container"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/problem_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:background="#ee2bfa4a"
-                android:height="40dp"
+                android:layout_width="250dp"
                 android:layout_height="80dp"
-                android:layout_width="250dp" />
+                android:background="#ee2bfa4a"
+                android:gravity="center"
+                android:text="题目内容区域"
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
 
             <TextView
                 android:id="@+id/problem_answer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:textSize="25sp"
-                android:gravity="center"
                 android:background="#fc8505"
-                android:layout_width="110dp"
-                android:layout_height="80dp" />
+                android:gravity="center"
+                android:text="答案区"
+                android:textColor="#000000"
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:layout_below="@+id/problem_container"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/problem_container"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
-                android:text="上一题"
-                android:onClick="NumClick"
                 android:id="@+id/last_problem"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:text="上一题" />
 
             <ImageView
                 android:id="@+id/img_finishProblem"
-                android:src="@drawable/submit"
-                android:visibility="invisible"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:onClick="NumClick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:onClick="NumClick"
+                android:src="@drawable/submit"
+                android:visibility="invisible" />
 
             <Button
-                android:text="下一题"
-                android:onClick="NumClick"
                 android:id="@+id/next_problem"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:text="下一题" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -109,126 +112,126 @@
     <!-- 数字键盘 -->
     <LinearLayout
         android:id="@+id/num_keyword"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:background="@color/white"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/img_numOne"
-                android:src="@drawable/num_1"
-                android:onClick="NumClick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_1" />
 
             <ImageView
                 android:id="@+id/img_numTwo"
-                android:src="@drawable/num_2"
-                android:onClick="NumClick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_2" />
 
             <ImageView
                 android:id="@+id/img_numThree"
-                android:src="@drawable/num_3"
-                android:onClick="NumClick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_3" />
 
             <ImageView
                 android:id="@+id/img_divide"
-                android:src="@drawable/divide"
-                android:onClick="NumClick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/divide" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/img_numFour"
-                android:onClick="NumClick"
-                android:src="@drawable/num_4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_4" />
 
             <ImageView
                 android:id="@+id/img_numFive"
-                android:onClick="NumClick"
-                android:src="@drawable/num_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_5" />
 
             <ImageView
                 android:id="@+id/img_numSix"
-                android:onClick="NumClick"
-                android:src="@drawable/num_6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_6" />
 
             <ImageView
                 android:id="@+id/img_minus"
-                android:onClick="NumClick"
-                android:src="@drawable/minus"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/minus" />
 
             <ImageView
                 android:id="@+id/img_clean"
-                android:onClick="NumClick"
-                android:src="@drawable/clean"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/clean" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/img_numSeven"
-                android:onClick="NumClick"
-                android:src="@drawable/num_7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_7" />
 
             <ImageView
                 android:id="@+id/img_numEight"
-                android:onClick="NumClick"
-                android:src="@drawable/num_8"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_8" />
 
             <ImageView
                 android:id="@+id/img_numNine"
-                android:onClick="NumClick"
-                android:src="@drawable/num_9"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_9" />
 
             <ImageView
                 android:id="@+id/img_numZero"
-                android:onClick="NumClick"
-                android:src="@drawable/num_0"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/num_0" />
 
             <ImageView
                 android:id="@+id/img_point"
-                android:onClick="NumClick"
-                android:src="@drawable/point"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="NumClick"
+                android:src="@drawable/point" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
