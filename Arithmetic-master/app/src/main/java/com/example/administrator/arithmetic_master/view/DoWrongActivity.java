@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -218,13 +219,12 @@ public class DoWrongActivity extends AppCompatActivity {
         int rightCount=0;
         for(int i=0;i<User.getInstance().currentExeNum;i++)
         {
-            if(answerContainer.get(i).equals(correctAnswerContainer.get(i)))
+            if(answerContainer.get(i).equals(correctAnswerContainer.get(i))) //增加正确的题目数量
             {
                 rightCount++;
             }
         }
         String str_rightCount=rightCount+"";
-
         //计算分数
         float score=0;
         float float_rightCount=rightCount;
@@ -240,7 +240,7 @@ public class DoWrongActivity extends AppCompatActivity {
         }
         DisplayMsg.Show(this,"您答对了"+str_rightCount+",所得积分为："+score);
 
-        //将记录发送到服务端记录
+        //将答题结果发送到服务端记录
         String url="recordsAction_saveRecord.action?userid="+userId+"&rightcount="+str_rightCount+"&totalcount="+totalCount+"&time="+useTime;
         new HttpUtil(new Handler()
         {
@@ -250,5 +250,7 @@ public class DoWrongActivity extends AppCompatActivity {
 
             }
         },url).start();
+
+
     }
 }

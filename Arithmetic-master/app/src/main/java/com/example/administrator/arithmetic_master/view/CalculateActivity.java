@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.example.administrator.arithmetic_master.grade.GradeTwo;
 import com.example.administrator.arithmetic_master.http.HttpUtil;
 import com.example.administrator.arithmetic_master.utils.Convert;
 import com.example.administrator.arithmetic_master.utils.DisplayMsg;
+import com.example.administrator.arithmetic_master.utils.EncodeAndDecode;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -251,16 +253,24 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
     }
 
     private void SendResult() {
+        String wrongProblem="";
         String userId = User.getInstance().getUserId();
         String totalCount = User.getInstance().currentExeNum + "";
         String useTime = totalTime + "";
         int rightCount = 0;
-        for (int i = 0; i < User.getInstance().currentExeNum; i++) {
-            if (answerContainer.get(i).equals(correctAnswerContainer.get(i))) {
+        for (int i = 0; i < User.getInstance().currentExeNum; i++)
+        {
+            if (answerContainer.get(i).equals(correctAnswerContainer.get(i)))
+            {  //增加正确的题目数量
                 rightCount++;
+            }
+            else
+            {  //记录错误的题目
+                wrongProblem+=contentContainer.get(i)+"|";
             }
         }
         String str_rightCount = rightCount + "";
+        wrongProblem=wrongProblem.substring(0,wrongProblem.length()-1);
 
         //计算分数
         float score = 0;
@@ -283,6 +293,20 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
 
             }
         }, url).start();
+
+        //将错误题目发送到服务端
+        Log.i("Wrong Problem......",wrongProblem);
+        String newEncodeWrongProblem= EncodeAndDecode.Encode(wrongProblem);
+        Log.i("Wrong Problem New...",newEncodeWrongProblem);
+        String wrongProblemUrl="errorsAction_saveError.action?userid="+userId+"&content="+newEncodeWrongProblem;
+        new HttpUtil(new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+            }
+        },wrongProblemUrl).start();
     }
 
     @Override
