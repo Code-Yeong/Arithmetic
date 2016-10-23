@@ -4,41 +4,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context="com.example.administrator.arithmetic_master.view.StatisticActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="50dp"
+        android:background="#5668ab">
+
         <ImageView
             android:id="@+id/sta_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backtomain"/>
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/leaderboard_back" />
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textSize="45px"
-            android:text="数据统计"/>
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="数据统计"
+            android:textSize="55px" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:gravity="center"
         android:background="#8ecdea"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_textview"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="暂无数据"
+            android:textSize="26px" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_textview"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="暂无数据"
+            android:textSize="26px" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_textview"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="暂无数据"
+            android:textSize="26px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
         android:layout_marginTop="10dp"
-        android:padding="3dp"
-        android:orientation="horizontal">
+        android:background="#8ecdea"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
         <TextView
             android:id="@+id/sta_rate"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="10dp"
             android:background="@drawable/shape_textview"
-            android:textSize="26px"
-            android:padding="2dp"
             android:gravity="center"
-            android:text="暂无数据"/>
+            android:padding="2dp"
+            android:text="暂无数据"
+            android:textSize="26px" />
+
         <TextView
             android:id="@+id/sta_count"
             android:layout_width="80dp"
@@ -47,8 +95,9 @@
             android:background="@drawable/shape_textview"
             android:gravity="center"
             android:padding="2dp"
-            android:textSize="26px"
-            android:text="暂无数据"/>
+            android:text="暂无数据"
+            android:textSize="26px" />
+
         <TextView
             android:id="@+id/sta_score"
             android:layout_width="80dp"
@@ -57,14 +106,15 @@
             android:background="@drawable/shape_textview"
             android:gravity="center"
             android:padding="2dp"
-            android:textSize="26px"
-            android:text="暂无数据"/>
+            android:text="暂无数据"
+            android:textSize="26px" />
     </LinearLayout>
+
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
-        android:background="#8ecdea"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:background="#8ecdea" />
 </LinearLayout>

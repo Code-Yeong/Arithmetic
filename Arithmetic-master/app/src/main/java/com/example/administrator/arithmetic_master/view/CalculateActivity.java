@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
     private ArrayList<String> correctAnswerContainer = new ArrayList<>();//正确答案的容器
     private int currentProblemIndex = 0;//当前题目索引
 
+    private Button btn_last, btn_next;
     private TextView problem_content;
     private TextView problem_answer;
     private ImageView finishProblem;
@@ -59,6 +61,11 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         problem_content = (TextView) findViewById(R.id.problem_content);
         problem_answer = (TextView) findViewById(R.id.problem_answer);
         finishProblem = (ImageView) findViewById(R.id.img_finishProblem);
+
+        btn_last = (Button) findViewById(R.id.last_problem);
+        btn_next = (Button) findViewById(R.id.next_problem);
+        btn_last.setVisibility(View.INVISIBLE);
+
         timeHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -122,6 +129,9 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
 
 
     public void NumClick(View view) {
+        if (currentProblemIndex == User.getInstance().currentExeNum - 1) {
+            finishProblem.setVisibility(View.VISIBLE);
+        }
         switch (view.getId()) {
             case R.id.img_numOne:
                 AlterAnswer("1");
@@ -157,13 +167,15 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
                 AlterAnswer("Clean");
                 break;
             case R.id.next_problem:
+                btn_last.setVisibility(View.VISIBLE);
                 //防止数组越界
                 if (currentProblemIndex < User.getInstance().currentExeNum - 1) {
                     currentProblemIndex++;
                 }
 
                 if (currentProblemIndex == User.getInstance().currentExeNum - 1) {
-                    finishProblem.setVisibility(View.VISIBLE);
+//                    finishProblem.setVisibility(View.VISIBLE);
+                    btn_next.setVisibility(View.INVISIBLE);
                 }
 
                 UpdateProblem(currentProblemIndex);
@@ -171,7 +183,11 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
             case R.id.last_problem:
                 if (currentProblemIndex > 0) {
                     currentProblemIndex--;
+                    btn_next.setVisibility(View.VISIBLE);
+                } else {
+                    btn_last.setVisibility(View.INVISIBLE);
                 }
+
                 UpdateProblem(currentProblemIndex);
                 break;
             case R.id.img_divide:
@@ -253,24 +269,20 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
     }
 
     private void SendResult() {
-        String wrongProblem="";
+        String wrongProblem = "";
         String userId = User.getInstance().getUserId();
         String totalCount = User.getInstance().currentExeNum + "";
         String useTime = totalTime + "";
         int rightCount = 0;
-        for (int i = 0; i < User.getInstance().currentExeNum; i++)
-        {
-            if (answerContainer.get(i).equals(correctAnswerContainer.get(i)))
-            {  //增加正确的题目数量
+        for (int i = 0; i < User.getInstance().currentExeNum; i++) {
+            if (answerContainer.get(i).equals(correctAnswerContainer.get(i))) {  //增加正确的题目数量
                 rightCount++;
-            }
-            else
-            {  //记录错误的题目
-                wrongProblem+=contentContainer.get(i)+"|";
+            } else {  //记录错误的题目
+                wrongProblem += contentContainer.get(i) + "|";
             }
         }
         String str_rightCount = rightCount + "";
-        wrongProblem=wrongProblem.substring(0,wrongProblem.length()-1);
+        wrongProblem = wrongProblem.substring(0, wrongProblem.length() - 1);
 
         //计算分数
         float score = 0;
@@ -295,23 +307,21 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         }, url).start();
 
         //将错误题目发送到服务端
-        Log.i("Wrong Problem......",wrongProblem);
-        String newEncodeWrongProblem= EncodeAndDecode.Encode(wrongProblem);
-        Log.i("Wrong Problem New...",newEncodeWrongProblem);
-        String wrongProblemUrl="errorsAction_saveError.action?userid="+userId+"&content="+newEncodeWrongProblem;
-        new HttpUtil(new Handler()
-        {
+        Log.i("Wrong Problem......", wrongProblem);
+        String newEncodeWrongProblem = EncodeAndDecode.Encode(wrongProblem);
+        Log.i("Wrong Problem New...", newEncodeWrongProblem);
+        String wrongProblemUrl = "errorsAction_saveError.action?userid=" + userId + "&content=" + newEncodeWrongProblem;
+        new HttpUtil(new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 
             }
-        },wrongProblemUrl).start();
+        }, wrongProblemUrl).start();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         this.finish();
     }
 }
