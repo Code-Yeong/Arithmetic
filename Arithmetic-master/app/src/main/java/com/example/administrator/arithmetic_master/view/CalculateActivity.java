@@ -285,15 +285,9 @@ public class CalculateActivity extends FragmentActivity implements CalculateSett
         wrongProblem = wrongProblem.substring(0, wrongProblem.length() - 1);
 
         //计算分数
-        float score = 0;
-        float float_rightCount = rightCount;
-        float float_totalCount = User.getInstance().currentExeNum;
+        int score = 0;
+        score =rightCount * (200 * User.getInstance().getUserGrade() / totalTime);
 
-        if (User.getInstance().getUserGrade() < 4) {
-            score = (float_rightCount / float_totalCount) * (5 * float_totalCount / totalTime);
-        } else {
-            score = (float_rightCount / float_totalCount) * (10 * float_totalCount / totalTime);
-        }
         DisplayMsg.Show(this, "您答对了" + str_rightCount + ",所得积分为：" + score);
 
         //将记录发送到服务端记录

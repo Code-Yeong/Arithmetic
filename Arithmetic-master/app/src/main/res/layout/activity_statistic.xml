@@ -33,37 +33,35 @@
         android:layout_height="110dp"
         android:background="#8ecdea"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="3dp">
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_textview"
+            android:id="@+id/sta_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="2dp"
-            android:text="暂无数据"
+            android:text="姓名"
             android:textSize="26px" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_textview"
+            android:id="@+id/sta_grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_margin="10dp"
             android:padding="2dp"
-            android:text="暂无数据"
+            android:text="年级"
             android:textSize="26px" />
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/shape_textview"
+            android:id="@+id/sta_loginname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="2dp"
-            android:text="暂无数据"
+            android:text="学号"
             android:textSize="26px" />
     </LinearLayout>
 
