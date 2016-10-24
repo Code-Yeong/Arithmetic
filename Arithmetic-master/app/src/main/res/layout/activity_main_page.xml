@@ -174,7 +174,7 @@
                     android:adjustViewBounds="true"
                     android:padding="10dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/statistic" />
+                    android:src="@drawable/personal" />
             </LinearLayout>
         </LinearLayout>
 

@@ -10,12 +10,12 @@
     <!--top-->
     <RelativeLayout
         android:id="@+id/personal_top_part"
-        android:layout_width="400dp"
+        android:layout_width="450dp"
         android:layout_height="250dp">
 
         <ImageView
             android:src="@drawable/personal_top_bg"
-            android:layout_width="400dp"
+            android:layout_width="450dp"
             android:layout_height="250dp" />
 
         <ImageView
@@ -130,6 +130,8 @@
 
     <!--center-->
     <LinearLayout
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:id="@+id/personal_center_part"
         android:layout_below="@id/personal_top_part"
         android:orientation="horizontal"

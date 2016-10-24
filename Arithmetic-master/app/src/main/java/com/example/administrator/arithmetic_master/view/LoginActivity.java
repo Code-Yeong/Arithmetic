@@ -172,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void parseUserInfo(String info) {
+        Log.i("info","Stu:"+info);
         try {
             JSONObject j = new JSONObject(info);
             User u = User.getInstance();
@@ -181,6 +182,9 @@ public class LoginActivity extends AppCompatActivity {
             u.setUserLoginName(j.getString("loginname"));
             u.setUserName(j.getString("name"));
             u.setSex(j.getString("sex"));
+            u.setAddress(j.getString("address"));
+            u.setEmail(j.getString("email"));
+            u.setPhone(j.getString("phone"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

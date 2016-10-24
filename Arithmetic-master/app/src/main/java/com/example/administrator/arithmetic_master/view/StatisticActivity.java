@@ -37,7 +37,7 @@ public class StatisticActivity extends AppCompatActivity {
     private int total = 0;//答题总数
     private int right = 0;//答对的题目数量
     private int max = 0;//最高成绩
-
+    private TextView name, loginname, grade;
     private TextView sta_rate, sta_score, sta_count;
     private ImageView img_back;
 
@@ -52,6 +52,10 @@ public class StatisticActivity extends AppCompatActivity {
         sta_count = (TextView) findViewById(R.id.sta_count);
         img_back = (ImageView) findViewById(R.id.sta_back);
 
+        name = (TextView) findViewById(R.id.sta_name);
+        loginname = (TextView) findViewById(R.id.sta_loginname);
+        grade = (TextView) findViewById(R.id.sta_grade);
+
         Intent intent = getIntent();
         new HttpUtil(new Handler() {
             @Override
@@ -61,6 +65,10 @@ public class StatisticActivity extends AppCompatActivity {
             }
         }, "recordsAction_getRecordsByUser.action?userid=" + intent.getStringExtra("userid")
         ).start();
+
+        name.setText("姓名:"+User.getInstance().getUserName());
+        loginname.setText("学号:"+User.getInstance().getUserLoginName());
+        grade.setText("年级:"+User.getInstance().getUserGrade()+"年级");
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
